@@ -7,24 +7,37 @@ namespace RestApiDemo.WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class IteamController : ControllerBase
+    public class ItemController : ControllerBase
     {
         private readonly ShopService _shopService;
 
-        public IteamController(ShopService shopService)
+        public ItemController(ShopService shopService)
         {
             _shopService = shopService;
         }
         [HttpGet]
-        public int GetAll()
+        public List<Item> GetAll()
         {
-            return _shopService.Get();
+            return _shopService.GetAll();
         }
 
         [HttpPost]
-        public void AddItem()
+        public void AddItem(Item item) // reikia nurodyti koki mes Item norime prideti
         {
+            _shopService.AddItem(item);
+        }
 
+
+        [HttpPut]
+        public void UpdateItem(Item item) // reikia nurodyti koki mes Item norime prideti
+        {
+            _shopService.AddItem(item);
+        }
+
+        [HttpDelete("{id}")]
+        public void DeteleItem(int id)
+        {
+            _shopService.DeleteItem(id);
         }
     }
 }
